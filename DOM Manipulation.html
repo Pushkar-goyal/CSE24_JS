@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JavaScript DOM Experiment</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    text-align: center;
+}
+
+.container{
+    width: 500px;
+    margin: 100px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+}
+
+button{
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    background-color: #1e88e5;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #1565c0;
+}
+
+input{
+    padding: 8px;
+    width: 250px;
+    margin: 10px;
+}
+
+p{
+    font-size: 16px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2 id="heading">Welcome to JavaScript Lab</h2>
+
+<input type="text" id="textInput" placeholder="Enter new heading text">
+
+<br><br>
+
+<button id="changeHeading">Change Heading</button>
+<button id="changeBg">Change Background</button>
+<button id="increaseFont">Increase Font Size</button>
+<br>
+
+<button id="togglePara">Show/Hide Paragraph</button>
+<button id="reset">Reset</button>
+
+<p id="para">
+This is a sample paragraph. JavaScript events can dynamically change content.
+</p>
+
+</div>
+
+<script>
+
+let fontSize = 16;
+
+document.getElementById("changeHeading").addEventListener("click", function(){
+    let text = document.getElementById("textInput").value;
+    document.getElementById("heading").innerText = text;
+});
+
+document.getElementById("changeBg").addEventListener("click", function(){
+    document.body.style.backgroundColor =
+        "#" + Math.floor(Math.random()*16777215).toString(16);
+});
+
+document.getElementById("increaseFont").addEventListener("click", function(){
+    fontSize += 2;
+    document.getElementById("para").style.fontSize = fontSize + "px";
+});
+
+document.getElementById("togglePara").addEventListener("click", function(){
+    let p = document.getElementById("para");
+    
+    if(p.style.display === "none")
+        p.style.display = "block";
+    else
+        p.style.display = "none";
+});
+
+document.getElementById("reset").addEventListener("click", function(){
+    location.reload();
+});
+
+</script>
+
+</body>
+</html>
