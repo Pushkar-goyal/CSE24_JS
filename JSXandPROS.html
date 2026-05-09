@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Components using Props</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: darkblue;
+            margin-bottom: 30px;
+        }
+
+        .student-card {
+            background-color: white;
+            width: 300px;
+            margin: 15px auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        .student-card h2 {
+            color: darkred;
+            margin-bottom: 10px;
+        }
+
+        .student-card p {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        function Student(props) {
+            return (
+                <div className="student-card">
+                    <h2>{props.name}</h2>
+                    <p>Course : {props.course}</p>
+                    <p>Marks : {props.marks} / 100</p>
+                </div>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <h1>Student Information</h1>
+
+                    <Student
+                        name="Arjun Sharma"
+                        course="B.Tech CSE"
+                        marks={88}
+                    />
+
+                    <Student
+                        name="Priya Gupta"
+                        course="B.Tech ECE"
+                        marks={92}
+                    />
+
+                    <Student
+                        name="Rahul Verma"
+                        course="B.Tech ME"
+                        marks={75}
+                    />
+
+                    <Student
+                        name="Sneha Patel"
+                        course="B.Tech IT"
+                        marks={95}
+                    />
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(
+            document.getElementById('root')
+        );
+
+        root.render(<App />);
+
+    </script>
+
+</body>
+</html>
