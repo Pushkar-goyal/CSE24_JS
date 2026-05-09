@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px 40px 35px;
+      width: 460px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 22px;
+      color: #111;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      display: block;
+      width: 100%;
+      padding: 9px 12px;
+      margin-bottom: 14px;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    input:focus { border-color: #2e7d32; }
+
+    .btn-register {
+      display: block;
+      margin: 6px auto 0;
+      padding: 9px 30px;
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-register:hover { background: #1b5e20; }
+
+    .success-msg {
+      text-align: center;
+      color: #2e7d32;
+      font-weight: 700;
+      font-size: 14px;
+      margin: 12px 0 0;
+    }
+
+    .users-box {
+      margin-top: 18px;
+      background: #f1f8e9;
+      border: 1px solid #c5e1a5;
+      border-radius: 6px;
+      padding: 16px 20px;
+    }
+
+    .users-box h2 {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1b5e20;
+      margin-bottom: 10px;
+    }
+
+    .users-box ul {
+      list-style: disc;
+      padding-left: 24px;
+      margin: 0;
+    }
+
+    .users-box li {
+      font-size: 13px;
+      color: #2e7d32;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    function RegistrationForm() {
+      const [name,     setName]     = useState('');
+      const [email,    setEmail]    = useState('');
+      const [password, setPassword] = useState('');
+      const [users,    setUsers]    = useState([]);
+      const [msg,      setMsg]      = useState('');
+
+      function handleRegister() {
+        if (!name.trim() || !email.trim() || !password.trim()) return;
+
+        setUsers(prev => [...prev, { name: name.trim(), email: email.trim() }]);
+        setMsg('Registration Successful!');
+        setName('');
+        setEmail('');
+        setPassword('');
+      }
+
+      return (
+        <div className="card">
+          <h1>Registration Form</h1>
+
+          <input
+            type="text"
+            placeholder="Enter Name"
+            value={name}
+            onChange={e => setName(e.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+
+          <button className="btn-register" onClick={handleRegister}>
+            Register
+          </button>
+
+          {msg && <p className="success-msg">{msg}</p>}
+
+          {users.length > 0 && (
+            <div className="users-box">
+              <h2>Registered Users</h2>
+              <ul>
+                {users.map((u, i) => (
+                  <li key={i}>{u.name} – {u.email}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<RegistrationForm />);
+  </script>
+</body>
+</html>
